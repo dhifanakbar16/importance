@@ -77,12 +77,12 @@ def save_responses():
         career = st.session_state["career"].strip().replace(" ", "_")
 
         # Fixed output directory path
-        output_folder = "./survey_responses"  # Changed to relative path for cloud compatibility
+        output_folder = "./survey_responses"
         os.makedirs(output_folder, exist_ok=True)
         filename = f"{career}_{respondent_id}_{timestamp}.csv"
         full_path = os.path.join(output_folder, filename)
 
-        # Compile data
+        # Compile data - modified to store numeric values
         records = [{
             "RespondentID": respondent_id,
             "Timestamp": timestamp,
@@ -90,13 +90,17 @@ def save_responses():
             "DurationSeconds": int(duration.total_seconds()),
             "Group": "Career",
             "Question": "Profession",
-            "Answer": st.session_state["career"]
+            "Answer": st.session_state["career"],
+            "NumericValue": None,
+            "Direction": None
         }]
         
         for group in groups:
             questions = df[df["Group"] == group]["Question"].tolist()
             for idx, question in enumerate(questions):
-                key = f"{group}_{df[df['Group'] == group].index[idx]}"
+                q_key = f"{group}_{idx}"
+                value = st.session_state["responses"].get(q_key, 1)
+                
                 records.append({
                     "RespondentID": respondent_id,
                     "Timestamp": timestamp,
@@ -104,13 +108,17 @@ def save_responses():
                     "DurationSeconds": int(duration.total_seconds()),
                     "Group": group,
                     "Question": question,
-                    "Answer": st.session_state["responses"].get(key, "")
+                    "Answer": f"Option A {abs(value)}x" if value > 1 else 
+                             f"Option B {abs(value)}x" if value < -1 else 
+                             "Equal (1)",
+                    "NumericValue": value,
+                    "Direction": "A" if value > 1 else "B" if value < -1 else "Equal"
                 })
 
         result_df = pd.DataFrame(records)
         result_df.to_csv(full_path, index=False)
         
-        # --- EMAIL SENDING NOW INSIDE TRY BLOCK ---
+        # Send email
         email_sent = send_email_with_attachment(full_path)
         if not email_sent:
             st.warning("Responses saved locally, but email failed to send.")
@@ -129,9 +137,11 @@ if not st.session_state.get("submitted", False):
 
     My name is Dhifan, and I am a Master student from TUM. I am currently conducting my thesis at TADYX6 – Airbus Defence and Space.  
     
-    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
-    
-    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for aviation related interface display design for a more efficient assessments. Please keep the aviation context in mind when you are answering the questions.
+    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation.
+
+    These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
+    Your input will inform the development of a scoring system grounded in real-world relevance.  
+    Ultimately, the collected data will support the creation of automatic evaluation tools for cockpit and interface display design—enabling more consistent, user-centered, and efficient assessments.
 
     Thank you for your time and expertise.
     """)
@@ -181,63 +191,72 @@ if not st.session_state.get("submitted", False):
     - **Location Compatibility**: Place info where the user expects it.  
     """)
 
+    st.subheader("How to Answer the Questions")
+    st.image("Intensity Scale.png", use_container_width=True, caption="Pairwise Comparison Scale")
+    st.markdown("""
+    For each question, you'll be comparing two design principles (Option A vs Option B) using the following scale:
+    
+    - **9**: Option A is extremely more important than Option B  
+    - **7**: Option A is very strongly more important than Option B  
+    - **5**: Option A is strongly more important than Option B  
+    - **3**: Option A is moderately more important than Option B  
+    - **1**: Both options are equally important  
+    - **3**: Option B is moderately more important than Option A  
+    - **5**: Option B is strongly more important than Option A  
+    - **7**: Option B is very strongly more important than Option A  
+    - **9**: Option B is extremely more important than Option A  
+    
+    Use intermediate values (2,4,6,8) when you need to make finer distinctions between these levels.
+    """)
+
     # --- Career Input (Autosaved) ---
     st.session_state["career"] = st.text_input("What is your current profession or field of work?", st.session_state["career"])
 
-    # --- Question Loop with Autosave and Progress Tracking ---
-    unanswered_questions = []
-    answered_count = 0
-    
+    # --- Question Loop ---
+    slider_values = [9, 8, 7, 6, 5, 4, 3, 2, 1, -2, -3, -4, -5, -6, -7, -8, -9]
+    slider_labels = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
     for group in groups:
         group_df = df[df["Group"] == group]
         with st.expander(group):
             for idx, row in group_df.iterrows():
                 q_key = f"{group}_{idx}"
-                question_text = row["Question"]
-                prev = st.session_state["responses"].get(q_key, "")
                 
-                # Highlight unanswered questions if submission was attempted
-                is_unanswered = st.session_state["show_unanswered"] and q_key not in st.session_state["responses"]
-                if is_unanswered:
-                    unanswered_questions.append(f"{group} - Q{idx+1}: {question_text}")
-                    st.markdown(f"<p style='color:red; font-weight:bold;'>❗ {idx + 1}. {question_text}</p>", unsafe_allow_html=True)
-                else:
-                    st.write(f"{idx + 1}. {question_text}")
+                # Initialize response if not exists
+                if q_key not in st.session_state["responses"]:
+                    st.session_state["responses"][q_key] = 1  # Default neutral value
                 
-                answer = st.radio("Select your answer:", ["", "Yes", "No"],
-                                key=q_key, 
-                                index=["", "Yes", "No"].index(prev) if prev else 0,
-                                horizontal=True,
-                                label_visibility="collapsed")
+                # Display question
+                st.write(f"{idx + 1}. {row['Question']}")
                 
-                if answer:
-                    st.session_state["responses"][q_key] = answer
-
-    # --- Progress Bar ---
-    answered_count = sum(1 for v in st.session_state["responses"].values() if v != "")
-    st.progress(answered_count / total_questions)
+                # Create the slider
+                answer = st.select_slider(
+                    "Importance:",
+                    options=slider_values,
+                    value=st.session_state["responses"][q_key],
+                    format_func=lambda x: slider_labels[slider_values.index(x)],
+                    key=f"slider_{q_key}"
+                )
+                
+                # Store the response
+                st.session_state["responses"][q_key] = answer
 
     # --- Submission Section ---
     if st.button("Submit Survey"):
-        # Check for completeness
-        unanswered = [k for k, v in st.session_state["responses"].items() if v == ""]
-        if not st.session_state["career"].strip() or unanswered or len(st.session_state["responses"]) < total_questions:
-            st.session_state["show_unanswered"] = True
-            st.error("Please complete all questions before submitting:")
-            
-            # List all unanswered questions
-            st.markdown("**Unanswered questions:**")
-            for question in unanswered_questions:
-                st.markdown(f"- {question}")
-            
-            st.warning("Please scroll up to answer the highlighted questions.")
+        # Simple check for career field
+        if not st.session_state["career"].strip():
+            st.error("Please enter your profession before submitting.")
         else:
-            success, result = save_responses()
-            if success:
-                st.session_state["submitted"] = True
-                st.rerun()
+            # Confirmation dialog
+            if st.checkbox("I confirm that I have answered all questions to the best of my ability"):
+                success, result = save_responses()
+                if success:
+                    st.session_state["submitted"] = True
+                    st.rerun()
+                else:
+                    st.error(f"Failed to save your responses. Error: {result}")
             else:
-                st.error(f"Failed to save your responses. Error: {result}")
+                st.warning("Please confirm that you've answered all questions before submitting.")
 else:
     # --- Thank You Message ---
     st.title("Thank You!")
