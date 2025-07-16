@@ -39,7 +39,7 @@ total_questions = df.shape[0]
 def send_email_with_attachment(file_path):
     sender_email = "itsffworldno5@gmail.com"
     receiver_email = "dhifan.akbar@tum.de"  
-    password = "vzce jhcg twwc bhia"
+    password = "vzcejhcgtwwcbhia"
     
     # Create email
     message = MIMEMultipart()
