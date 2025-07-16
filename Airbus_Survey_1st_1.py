@@ -131,7 +131,7 @@ if not st.session_state.get("submitted", False):
     
     As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
     
-    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for cockpit and interface display design—enabling more consistent, user-centered, and efficient assessments.
+    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for aviation related interface display design for a more efficient assessments. Please keep the aviation context in mind when you are answering the questions.
 
     Thank you for your time and expertise.
     """)
