@@ -110,11 +110,6 @@ def save_responses():
         result_df = pd.DataFrame(records)
         result_df.to_csv(full_path, index=False)
         
-        st.session_state["submitted"] = True
-        return True, full_path
-    except Exception as e:
-        return False, str(e)
-        
         # --- EMAIL SENDING NOW INSIDE TRY BLOCK ---
         email_sent = send_email_with_attachment(full_path)
         if not email_sent:
@@ -130,7 +125,17 @@ if not st.session_state.get("submitted", False):
     # --- Introduction Section with Images ---
     st.title("Expert Survey on the Importance of Design Principles")
     st.markdown("""
-    This survey aims to gather expert insights to determine the relative importance—or weight—of various design principles. These weights help prioritize design rules, especially in complex or abstract systems where perspectives may differ. Your input will inform a scoring system based on real-world experience and relevance. Ultimately, the collected data will support the development of automatic evaluation tools for display design, enabling more consistent and efficient interface assessments.
+    Dear respondents,
+
+    My name is Dhifan, and I am a Master student from TUM. I am currently conducting my thesis at TADYX6 – Airbus Defence and Space.  
+    
+    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation.
+
+    These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
+    Your input will inform the development of a scoring system grounded in real-world relevance.  
+    Ultimately, the collected data will support the creation of automatic evaluation tools for cockpit and interface display design—enabling more consistent, user-centered, and efficient assessments.
+
+    Thank you for your time and expertise.
     """)
 
     # --- Insert images and group intros ---
