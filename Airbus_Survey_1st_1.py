@@ -96,8 +96,8 @@ def save_responses():
         }]
         
         for group in groups:
-            questions = df[df["Group"] == group]["Question"].tolist()
-            for idx, question in enumerate(questions):
+            group_df = df[df["Group"] == group]
+            for idx, row in group_df.iterrows():
                 q_key = f"{group}_{idx}"
                 value = st.session_state["responses"].get(q_key, 1)
                 
@@ -107,7 +107,7 @@ def save_responses():
                     "Career": st.session_state["career"],
                     "DurationSeconds": int(duration.total_seconds()),
                     "Group": group,
-                    "Question": question,
+                    "Question": row["Question"],
                     "Answer": f"Option A {abs(value)}x" if value > 1 else 
                              f"Option B {abs(value)}x" if value < -1 else 
                              "Equal (1)",
@@ -229,7 +229,7 @@ if not st.session_state.get("submitted", False):
                 # Display question
                 st.write(f"{idx + 1}. {row['Question']}")
                 
-                # Create the slider
+                # Create the slider with a unique key
                 answer = st.select_slider(
                     "Importance:",
                     options=slider_values,
@@ -238,7 +238,7 @@ if not st.session_state.get("submitted", False):
                     key=f"slider_{q_key}"
                 )
                 
-                # Store the response
+                # Store the response immediately
                 st.session_state["responses"][q_key] = answer
 
     # --- Submission Section ---
