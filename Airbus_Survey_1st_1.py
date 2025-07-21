@@ -135,7 +135,7 @@ if not st.session_state.get("submitted", False):
     st.markdown("""
     Dear respondents,
 
-    My name is Dhifan, and I am a Master student from TUM. I am currently conducting my thesis at TADYX6 – Airbus Defence and Space.  
+    My name is Dhifan, and I am a Master's student at the Technical University of Munich (TUM), currently conducting my thesis at TADYX6 – Airbus Defence and Space.  
     
     As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
     
