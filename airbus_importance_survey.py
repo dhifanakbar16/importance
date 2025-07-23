@@ -28,7 +28,7 @@ if "show_unanswered" not in st.session_state:
 # --- Load Questions ---
 @st.cache_data
 def load_questions():
-    df = pd.read_csv("Survey_Questions_Grouped.csv")
+    df = pd.read_csv("survey_questions_grouped.csv")
     return df
 
 df = load_questions()
