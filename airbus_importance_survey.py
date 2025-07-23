@@ -170,14 +170,14 @@ if not st.session_state.get("submitted", False):
     - **Top-Down Processing**: Design should align with user expectations.  
     - **Redundancy Gain**: Present information in more than one way.  
     - **Discriminability**: Make differences between items noticeable.  
-    - **Pictorial Realism**: Represent information in ways that mimic real-world structure.  
-    - **Moving Part**: Display motion should reflect actual or expected direction.  
+    - **Principle of Pictorial Realism**: Represent information in ways that mimic real-world structure.  
+    - **Principle of the Moving Part**: Display motion should reflect actual or expected direction.  
     - **Minimize Access Costs**: Frequently needed info should be easy to find.  
-    - **Proximity Compatibility**: Related items should be close together.  
-    - **Multiple Resources**: Distribute information across visual, auditory, spatial channels.  
-    - **Predictive Aiding**: Help users anticipate what's coming.  
-    - **Replace Memory**: Keep important data visible.  
-    - **Consistency**: Use familiar and repeated conventions.  
+    - **Proximity Compatibility Principle**: Related items should be close together.  
+    - **Principle of Multiple Resources**: Distribute information across visual, auditory, spatial channels.  
+    - **Principle of Predictive Aiding**: Help users anticipate what's coming.  
+    - **Replace Memory with Visual Information**: Keep important data visible.  
+    - **Principle of Consistency**: Use familiar and repeated conventions.  
     """)
 
     st.subheader("Ergonomics / Interface Design Heuristics")
