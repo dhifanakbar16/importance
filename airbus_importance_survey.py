@@ -135,11 +135,13 @@ if not st.session_state.get("submitted", False):
     st.markdown("""
     Dear respondents,
 
-    My name is Dhifan, and I am a Master's student at the Technical University of Munich (TUM), currently conducting my thesis at TADYX6 – Airbus Defence and Space.  
+    My name is Dhifan, and I am a Master's student at the Technical University of Munich (TUM), currently conducting my thesis at TADYX6 – Airbus Defence and Space. 
     
-    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
-    
-    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for cockpit and interface display design—enabling more consistent, user-centered, and efficient assessments.
+    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation.
+
+    These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
+    Your input will inform the development of a scoring system grounded in real-world relevance.  
+    Ultimately, the collected data will support the creation of automatic evaluation tools for cockpit and interface display design—enabling more consistent, user-centered, and efficient assessments.
 
     Thank you for your time and expertise.
     """)
@@ -208,7 +210,18 @@ if not st.session_state.get("submitted", False):
     """)
 
     # --- Career Input (Autosaved) ---
-    st.session_state["career"] = st.text_input("What is your current profession or field of work?", st.session_state["career"])
+    if not st.session_state.submitted:
+        # Add profession question before Gestalt Principles
+        st.session_state.responses["profession"] = st.selectbox(
+            "**What is your current profession or field of work?**",
+            ["Pilot", "Operators", "Aerospace Engineer", "UI/UX Designer", "Human Factors Engineers", 
+             "Researcher", "Student", "Other (please specify)"],
+            key="profession"
+        )
+        if st.session_state.responses["profession"] == "Other (please specify)":
+            st.session_state.responses["profession_other"] = st.text_input("Please specify your profession")
+
+            st.session_state["career"] = st.text_input("What is your current profession or field of work?", st.session_state["career"])
 
     # --- Question Loop ---
     slider_values = [9, 8, 7, 6, 5, 4, 3, 2, 1, -2, -3, -4, -5, -6, -7, -8, -9]
