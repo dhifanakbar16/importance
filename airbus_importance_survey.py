@@ -150,7 +150,7 @@ if not st.session_state.get("submitted", False):
     st.markdown("At the beginning of the survey, you will find brief explanations of key design principles and interface heuristics relevant to graphical user interface (GUI) evaluation. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
 
     # --- Insert images and group intros ---
-    st.markdown("**Gestalt Laws**")
+    st.subheader("**Gestalt Laws**")
     st.image("gestalt.png", use_container_width=True, caption="Gestalt Principles Overview")
     st.markdown("""
     - **Law of Closure**: We perceive incomplete shapes as complete figures by mentally "filling in" gaps.  
@@ -163,7 +163,7 @@ if not st.session_state.get("submitted", False):
     - **Law of Common Fate**: Elements moving in the same direction are perceived as belonging together.  
     """)
 
-    st.markdown("**Wickens' 13 Principles of Display Design**")
+    st.subheader("**Wickens' 13 Principles of Display Design**")
     st.image("wickens.png", use_container_width=True, caption="Wickens' Principles Overview")
     st.markdown("""
     - **Make Display Legible**: Ensure text, symbols, and graphics are easy to read.  
@@ -181,7 +181,7 @@ if not st.session_state.get("submitted", False):
     - **Principle of Consistency**: Use familiar and repeated conventions.  
     """)
 
-    st.markdown("**Ergonomics/Interface Design Heuristics**")
+    st.subheader("**Ergonomics/Interface Design Heuristics**")
     st.image("ergonomics.png", use_container_width=True, caption="Ergonomic and Interface Heuristics")
     st.markdown("""
     - **Frequency of Use**: Frequently used items should be easiest to reach.  
@@ -194,7 +194,7 @@ if not st.session_state.get("submitted", False):
     - **Location Compatibility**: Place info where the user expects it.  
     """)
 
-    st.markdown("**How to Answer the Questions**")
+    st.subheader("**How to Answer the Questions**")
     st.image("intensity_scale.png", use_container_width=True, caption="Pairwise Comparison Scale")
     st.markdown("""
     For each question, you'll be comparing two design principles (Option A vs Option B) using the following scale:
