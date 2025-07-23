@@ -148,7 +148,7 @@ if not st.session_state.get("submitted", False):
 
     # --- Insert images and group intros ---
     st.subheader("Gestalt Laws (Perception-based)")
-    st.image("Gestalt.png", use_container_width=True, caption="Gestalt Principles Overview")
+    st.image("gestalt.png", use_container_width=True, caption="Gestalt Principles Overview")
     st.markdown("""
     - **Law of Closure**: We perceive incomplete shapes as complete figures by mentally "filling in" gaps.  
     - **Law of Continuity**: Elements arranged along a smooth path are perceived as part of a continuous pattern.  
@@ -161,7 +161,7 @@ if not st.session_state.get("submitted", False):
     """)
 
     st.subheader("Wickens' 13 Principles of Display Design")
-    st.image("Wickens.png", use_container_width=True, caption="Wickens' Principles Overview")
+    st.image("wickens.png", use_container_width=True, caption="Wickens' Principles Overview")
     st.markdown("""
     - **Make Display Legible**: Ensure text, symbols, and graphics are easy to read.  
     - **Avoid Absolute Judgement Limits**: Avoid overreliance on subtle sensory cues (like color only).  
@@ -179,7 +179,7 @@ if not st.session_state.get("submitted", False):
     """)
 
     st.subheader("Ergonomics / Interface Design Heuristics")
-    st.image("Ergonomics.png", use_container_width=True, caption="Ergonomic and Interface Heuristics")
+    st.image("ergonomics.png", use_container_width=True, caption="Ergonomic and Interface Heuristics")
     st.markdown("""
     - **Frequency of Use**: Frequently used items should be easiest to reach.  
     - **Sequence of Use**: Place controls in the order they are typically used.  
@@ -192,7 +192,7 @@ if not st.session_state.get("submitted", False):
     """)
 
     st.subheader("How to Answer the Questions")
-    st.image("Intensity Scale.png", use_container_width=True, caption="Pairwise Comparison Scale")
+    st.image("intensity_scale.png", use_container_width=True, caption="Pairwise Comparison Scale")
     st.markdown("""
     For each question, you'll be comparing two design principles (Option A vs Option B) using the following scale:
     
