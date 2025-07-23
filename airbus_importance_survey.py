@@ -67,7 +67,7 @@ def send_email_with_attachment(file_path):
         st.error(f"Failed to send email: {str(e)}")
         return False
 
-# --- MODIFIED: Save Responses Function ---
+# Save Responses Function
 def save_responses():
     try:
         end_time = datetime.datetime.now()
@@ -76,25 +76,26 @@ def save_responses():
         timestamp = end_time.strftime("%Y-%m-%d_%H-%M-%S")
         career = st.session_state["career"].strip().replace(" ", "_")
 
-        # Fixed output directory path
+        # Create output directory if it doesn't exist
         output_folder = "./survey_responses"
         os.makedirs(output_folder, exist_ok=True)
         filename = f"{career}_{respondent_id}_{timestamp}.csv"
         full_path = os.path.join(output_folder, filename)
 
-        # Compile data - modified to store numeric values
+        # Compile all responses including profession
         records = [{
             "RespondentID": respondent_id,
             "Timestamp": timestamp,
             "Career": st.session_state["career"],
             "DurationSeconds": int(duration.total_seconds()),
-            "Group": "Career",
+            "Group": "Participant Info",
             "Question": "Profession",
             "Answer": st.session_state["career"],
             "NumericValue": None,
             "Direction": None
         }]
         
+        # Add all survey responses
         for group in groups:
             group_df = df[df["Group"] == group]
             for idx, row in group_df.iterrows():
@@ -115,10 +116,11 @@ def save_responses():
                     "Direction": "A" if value > 1 else "B" if value < -1 else "Equal"
                 })
 
+        # Create DataFrame and save
         result_df = pd.DataFrame(records)
         result_df.to_csv(full_path, index=False)
         
-        # Send email
+        # Send email with attachment
         email_sent = send_email_with_attachment(full_path)
         if not email_sent:
             st.warning("Responses saved locally, but email failed to send.")
@@ -209,19 +211,16 @@ if not st.session_state.get("submitted", False):
     Use intermediate values (2,4,6,8) when you need to make finer distinctions between these levels.
     """)
 
-    # --- Career Input (Autosaved) ---
-    if not st.session_state.submitted:
-        # Add profession question before Gestalt Principles
-        st.session_state.responses["profession"] = st.selectbox(
-            "**What is your current profession or field of work?**",
-            ["Pilot", "Operators", "Aerospace Engineer", "UI/UX Designer", "Human Factors Engineers", 
-             "Researcher", "Student", "Other (please specify)"],
-            key="profession"
-        )
-        if st.session_state.responses["profession"] == "Other (please specify)":
-            st.session_state.responses["profession_other"] = st.text_input("Please specify your profession")
-
-            st.session_state["career"] = st.text_input("What is your current profession or field of work?", st.session_state["career"])
+    # Career
+    st.session_state["career"] = st.selectbox(
+        "**What is your current profession or field of work?**",
+        ["Pilot", "Operators", "Aerospace Engineer", "UI/UX Designer", 
+         "Human Factors Engineers", "Researcher", "Student", "Other"],
+        key="career_select"
+    )
+    
+    if st.session_state["career"] == "Other":
+        st.session_state["career"] = st.text_input("Please specify your profession", key="career_other")
 
     # --- Question Loop ---
     slider_values = [9, 8, 7, 6, 5, 4, 3, 2, 1, -2, -3, -4, -5, -6, -7, -8, -9]
@@ -254,9 +253,9 @@ if not st.session_state.get("submitted", False):
 
     # --- Submission Section ---
     if st.button("Submit Survey"):
-        # Simple check for career field
-        if not st.session_state["career"].strip():
-            st.error("Please enter your profession before submitting.")
+        # Validate profession is selected
+        if not st.session_state.get("career") or st.session_state["career"].strip() == "":
+            st.error("Please select or specify your profession before submitting.")
         else:
             # Confirmation dialog
             if st.checkbox("I confirm that I have answered all questions to the best of my ability"):
@@ -268,6 +267,7 @@ if not st.session_state.get("submitted", False):
                     st.error(f"Failed to save your responses. Error: {result}")
             else:
                 st.warning("Please confirm that you've answered all questions before submitting.")
+
 else:
     # --- Thank You Message ---
     st.title("Thank You!")
