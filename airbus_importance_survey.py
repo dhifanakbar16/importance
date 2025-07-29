@@ -139,15 +139,15 @@ if not st.session_state.get("submitted", False):
 
     My name is Dhifan, and I am a Master's student at the Technical University of Munich (TUM), currently conducting my thesis at TADYX6 – Airbus Defence and Space. 
     
-    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in display evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
+    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in cockpit display evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
     
-    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for cockpit and interface display design—enabling more consistent, user-centered, and efficient assessments.
+    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for cockpit display design—enabling more consistent, user-centered, and efficient assessments.
 
     Thank you for your time and expertise.
     """)
 
     st.subheader("Guidance")
-    st.markdown("At the beginning of the survey, you will find brief explanations of key design principles and interface heuristics relevant to graphical user interface (GUI) evaluation. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
+    st.markdown("At the beginning of the survey, you will find brief explanations of cockpit display, key design principles, and interface heuristics. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
 
     # --- Insert images and group intros ---
     st.subheader("**Gestalt Laws**")
