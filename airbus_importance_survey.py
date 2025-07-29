@@ -87,6 +87,7 @@ def save_responses():
             "RespondentID": respondent_id,
             "Timestamp": timestamp,
             "Career": st.session_state["career"],
+            "IdentificationCode": st.session_state.get("identification_code", ""),
             "DurationSeconds": int(duration.total_seconds()),
             "Group": "Participant Info",
             "Question": "Profession",
