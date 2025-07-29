@@ -133,22 +133,39 @@ def save_responses():
 # --- Main Survey ---
 if not st.session_state.get("submitted", False):
     # --- Introduction Section with Images ---
-    st.title("Expert Survey on the Importance of Design Principles")
+    st.title("Expert Survey: The Importance of Design Principles on Electronic Flight Instrument System")
     st.markdown("""
     Dear respondents,
 
     My name is Dhifan, and I am a Master's student at the Technical University of Munich (TUM), currently conducting my thesis at TADYX6 – Airbus Defence and Space. 
     
-    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in cockpit display evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
+    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in Electronic Flight Instrument System (EFIS) evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
     
-    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for cockpit display design—enabling more consistent, user-centered, and efficient assessments.
+    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for EFIS design—enabling more consistent, user-centered, and efficient assessments.
 
     Thank you for your time and expertise.
     """)
 
     st.subheader("Guidance")
-    st.markdown("At the beginning of the survey, you will find brief explanations of cockpit display, key design principles, and interface heuristics. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
+    st.markdown("At the beginning of the survey, you will find brief explanations of EFIS, key design principles, and interface heuristics. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
 
+    st.subheader("Electronic Flight Instrument System")
+    st.markdown("""
+    An Electronic Flight Instrument System (EFIS) is a flight instrument display system in an aircraft cockpit that displays flight data electronically. It is the primary visual interfaces that present critical flight information to pilots. These systems integrate data from sensors, navigation systems, and aircraft controls into a consolidated, user-friendly format. Modern displays often use glass cockpit technology (digital screens), replacing traditional electromechanical display to enhance situational awareness and reduce workload.
+
+    Key Functions:
+    - Primary Flight Displays (PFDs): Show altitude, airspeed, attitude, and heading.
+    - Navigation Displays (NDs): Provide route maps, waypoints, and traffic/terrain alerts.
+    - Engine Indicating and Crew Alerting System (EICAS): Monitor aircraft health and alert pilots to anomalies.
+    - Multifunction Displays (MFDs): Allow interaction with subsystems (fuel, weather).
+
+    Design Goals:
+    - Clarity: Information must be unambiguous and quickly interpretable.
+    - Prioritization: Critical data (warnings) should stand out.
+    - Consistency: Follow standardized conventions to reduce cognitive load.
+    - Ergonomics: Ensure readability under varying lighting/operational conditions.
+    """)
+    
     # --- Insert images and group intros ---
     st.subheader("**Gestalt Laws**")
     st.image("gestalt.png", use_container_width=True, caption="Gestalt Principles Overview")
@@ -210,6 +227,13 @@ if not st.session_state.get("submitted", False):
     - **9**: Option B is extremely more important than Option A  
     
     Use intermediate values (2,4,6,8) when you need to make finer distinctions between these levels.
+    """)
+
+    st.markdown("""
+    **References**
+    - Wasson, James W. (2019), Electronic Instrument Systems.
+    - Wagemans, J., et. al. (2012), A Century of Gestalt Psychology in Visual Perception I.
+    - Wickens, Christopher D., et. al., (1997), An Introduction to Human Factors Engineering. 
     """)
 
     # Career
