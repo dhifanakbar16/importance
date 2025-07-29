@@ -165,6 +165,8 @@ if not st.session_state.get("submitted", False):
     - Prioritization: Critical data (warnings) should stand out.
     - Consistency: Follow standardized conventions to reduce cognitive load.
     - Ergonomics: Ensure readability under varying lighting/operational conditions.
+
+    Image Reference: https://karlenepetitt.blogspot.com/2012/01/a330-terminology-its-all-foreign.html
     """)
     
     # --- Insert images and group intros ---
