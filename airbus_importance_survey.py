@@ -150,6 +150,7 @@ if not st.session_state.get("submitted", False):
     st.markdown("At the beginning of the survey, you will find brief explanations of EFIS, key design principles, and interface heuristics. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
 
     st.subheader("Electronic Flight Instrument System")
+    st.image("efis.jpg", use_container_width=true, caption="Electronic Flight Instrument System")
     st.markdown("""
     An Electronic Flight Instrument System (EFIS) is a flight instrument display system in an aircraft cockpit that displays flight data electronically. It is the primary visual interfaces that present critical flight information to pilots. These systems integrate data from sensors, navigation systems, and aircraft controls into a consolidated, user-friendly format. Modern displays often use glass cockpit technology (digital screens), replacing traditional electromechanical display to enhance situational awareness and reduce workload.
 
