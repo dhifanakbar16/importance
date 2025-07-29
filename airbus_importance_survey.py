@@ -258,7 +258,7 @@ if not st.session_state.get("submitted", False):
     """)
     
     identification_code = st.text_input(
-        "Enter your identification code:",
+        "**Enter your identification code:**",
         key="identification_code",
         max_chars=8,
         help="Format: First 2 letters of mother's name + first 2 letters of father's name + mother's birth month (2 digits) + father's birth month (2 digits)"
