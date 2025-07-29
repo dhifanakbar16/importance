@@ -239,7 +239,9 @@ if not st.session_state.get("submitted", False):
     - Wickens, Christopher D., et. al., (1997), An Introduction to Human Factors Engineering. 
     """)
 
-    # --- Add the identification question ---
+    st.divider()
+
+    # Identification question 
     st.markdown("""
     **Identification for Data Management**
     
