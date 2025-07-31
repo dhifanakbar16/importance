@@ -140,20 +140,20 @@ if not st.session_state.get("submitted", False):
 
     My name is Dhifan, and I am a Master's student at the Technical University of Munich (TUM), currently conducting my thesis at TADYX6 – Airbus Defence and Space. 
     
-    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in Electronic Flight Instrument System (EFIS) evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
+    As part of this research, I hope to gather expert insights from professionals like you to determine the relative importance—or weight—of various design principles used in Electronic Instrument System (EIS) evaluation. These weights will help prioritize design rules, especially in complex or abstract systems where user perspectives may differ.  
     
-    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for EFIS design—enabling more consistent, user-centered, and efficient assessments.
+    Your input will inform the development of a scoring system grounded in real-world relevance. The collected data will support the creation of automatic evaluation tools for EIS design—enabling more consistent, user-centered, and efficient assessments.
 
     Thank you for your time and expertise.
     """)
 
     st.subheader("Guidance")
-    st.markdown("At the beginning of the survey, you will find brief explanations of EFIS, key design principles, and interface heuristics. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
+    st.markdown("At the beginning of the survey, you will find brief explanations of EIS, key design principles, and interface heuristics. These summaries are intended to provide context and support your understanding as you respond to the survey questions. You are welcome to revisit these explanations at any point during the survey by scrolling up, especially if you need a quick refresher or clarification while answering. Please take your time, and answer based on your professional judgment and expectations.")
 
-    st.subheader("Electronic Flight Instrument System")
+    st.subheader("Electronic Instrument System")
     st.image("efis.jpg", use_container_width=True, caption="Electronic Flight Instrument System")
     st.markdown("""
-    An Electronic Flight Instrument System (EFIS) is a flight instrument display system in an aircraft cockpit that displays flight data electronically. It is the primary visual interfaces that present critical flight information to pilots. These systems integrate data from sensors, navigation systems, and aircraft controls into a consolidated, user-friendly format. Modern displays often use glass cockpit technology (digital screens), replacing traditional electromechanical display to enhance situational awareness and reduce workload.
+    An Electronic Instrument System (EIS) is a flight instrument display system in an aircraft cockpit that displays flight data electronically. It consists of Electronic Flight Instrument System (EFIS) and Electronic Centralized Aircraft Monitoring (ECAM) and acts as the primary visual interfaces that present critical flight information to pilots. These systems integrate data from sensors, navigation systems, engine systems, and aircraft controls into a consolidated, user-friendly format. Modern displays often use glass cockpit technology (digital screens), replacing traditional electromechanical display to enhance situational awareness and reduce workload.
 
     Key Functions:
     - Primary Flight Displays (PFDs): Show altitude, airspeed, attitude, and heading.
