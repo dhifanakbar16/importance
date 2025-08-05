@@ -134,7 +134,7 @@ def save_responses():
 # --- Main Survey ---
 if not st.session_state.get("submitted", False):
     # --- Introduction Section with Images ---
-    st.title("Expert Survey: The Importance of Design Principles on Electronic Flight Instrument System")
+    st.title("Expert Survey: The Importance of Design Principles on Electronic Instrument System")
     st.markdown("""
     Dear respondents,
 
@@ -344,3 +344,4 @@ else:
         for key in list(st.session_state.keys()):
             del st.session_state[key]
         st.rerun()
+
