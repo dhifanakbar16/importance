@@ -246,8 +246,10 @@ if not st.session_state.get("submitted", False):
     st.markdown("""
     **Identification for Data Management**
     
-    Since the questionnaire is anonymous, we require you to answer the following question so that in the future, 
-    if you wish to destroy the data, you can identify your set of data and tell us which to destroy. 
+    By submitting your answer, you acknowledge that your data will be used for research purposes. You also confirm that you are aware of and agree to the data protection document attached to the email containing this questionnaire. 
+    
+    Since the questionnaire is anonymous, you are required to answer the following question so that in the future, 
+    if you wish to destroy the data, you can identify your set of data and inform which to destroy. 
     
     Please type in capital letters and in continuous format:
     - First two letters of mother's first name
@@ -344,4 +346,5 @@ else:
         for key in list(st.session_state.keys()):
             del st.session_state[key]
         st.rerun()
+
 
